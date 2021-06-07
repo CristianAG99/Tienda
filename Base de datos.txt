@@ -1,0 +1,37 @@
+create database tienda;
+use tienda;
+
+create table Cliente(
+IdCliente int not null auto_increment,
+Nombre varchar(30) not null,
+Nit varchar(30) not null,
+primary key (IdCliente)
+);
+create table Venta(
+IdVenta int not null auto_increment,
+Fecha date,
+IdCliente int,
+primary key (IdVenta),
+foreign key (IdCliente) references Cliente(IdCliente)
+);
+create table Producto(
+IdProducto int not null auto_increment,
+Nombre varchar(30) not null,
+PrecioUnitario decimal(10,2) not null,
+FechaCompra date,
+FechaVencimiento date,
+primary key (IdProducto)
+);
+create table VentaProducto(
+IdVentaProducto int not null auto_increment,
+Descripcion varchar(150) not null,
+IdProducto int,
+IdVenta int,
+primary key  (IdVentaProducto),
+foreign key(IdProducto) references Producto(IdProducto),
+foreign key(IdVenta) references Venta(IdVenta)
+);
+
+INSERT into Cliente(Nit,Nombre) values ("4751488","Kevin Guerra"),("98147390","Cristian Gomez");
+
+insert into producto(FechaCompra,FechaVencimiento,Nombre,PrecioUnitario) values("2021-01-15","2022-02-20","Mascarillas","10.00"),("2020-06-15","2021-06-04","Guantes","05.00"),("2020-12-20","2021-02-20","Traje","30.00")
